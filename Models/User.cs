@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using GreenGrid.Models;
 
 namespace GreenGrid.Models
 {
-    public class User
+    public class User : IdentityUser
     {
         public int Id { get; set; }
 
