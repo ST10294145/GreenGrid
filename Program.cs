@@ -3,6 +3,7 @@ using GreenGrid.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Session;
 
 namespace GreenGrid
 {
@@ -27,6 +28,15 @@ namespace GreenGrid
             // Add MVC services
             builder.Services.AddControllersWithViews();
 
+            // 🚧 Configure session services
+            builder.Services.AddDistributedMemoryCache();  // For session storage
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);  // Set session timeout (adjust as needed)
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             var app = builder.Build();
 
             // 🚧 Error handling and middleware
@@ -44,6 +54,9 @@ namespace GreenGrid
             // ⛔ Must be before UseAuthorization
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // 🛠️ Enable session middleware
+            app.UseSession();
 
             // 🛠️ Seed the database with roles and a default user on app startup
             using (var scope = app.Services.CreateScope())
