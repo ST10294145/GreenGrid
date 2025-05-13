@@ -1,5 +1,8 @@
-﻿using GreenGrid.Data; // Add this at the top
+﻿using GreenGrid.Data;
+using GreenGrid.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GreenGrid
 {
@@ -9,16 +12,24 @@ namespace GreenGrid
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // ✅ Add EF Core and SQL Server support
+            // 🔌 Configure EF Core with SQL Server
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Add services to the container.
+            // 🔐 Add Identity services with custom User and Role support
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+            // Add MVC services
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // 🚧 Error handling and middleware
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -30,8 +41,20 @@ namespace GreenGrid
 
             app.UseRouting();
 
+            // ⛔ Must be before UseAuthorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            // 🛠️ Seed the database with roles and a default user on app startup
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var userManager = services.GetRequiredService<UserManager<User>>();
+                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                SeedData.Initialize(services, userManager, roleManager).Wait();
+            }
+
+            // 🔁 MVC route
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
