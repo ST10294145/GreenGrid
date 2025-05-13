@@ -19,20 +19,25 @@ namespace GreenGrid.Data
                 }
             }
 
-            // Create a default admin user (Farmer) 
-            var user = await userManager.FindByEmailAsync("farmer@example.com");
+            // Create a default admin user (Farmer)
+            var adminEmail = "farmer.admin@greengrid.com";
+            var adminPassword = "Farmer@123";
+
+            var user = await userManager.FindByEmailAsync(adminEmail);
             if (user == null)
             {
                 user = new User
                 {
-                    UserName = "farmer@example.com",
-                    Email = "farmer@example.com"
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    EmailConfirmed = true,
+                    Province = "Gauteng",            // 👈 Required custom field
+                    Department = "Crop Production"   // 👈 Required custom field
                 };
 
-                var createUserResult = await userManager.CreateAsync(user, "Password123!");
+                var createUserResult = await userManager.CreateAsync(user, adminPassword);
                 if (createUserResult.Succeeded)
                 {
-                    // Assign the "Farmer" role to this user
                     await userManager.AddToRoleAsync(user, "Farmer");
                 }
             }
