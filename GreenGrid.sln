@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenGrid", "GreenGrid.csproj", "{8CC4E258-59D7-40E5-9ADB-D31C40C44C2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CC4E258-59D7-40E5-9ADB-D31C40C44C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC4E258-59D7-40E5-9ADB-D31C40C44C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC4E258-59D7-40E5-9ADB-D31C40C44C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC4E258-59D7-40E5-9ADB-D31C40C44C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DD5FC22-C899-44D0-9F00-5F0B1E889E5C}
+	EndGlobalSection
+EndGlobal
