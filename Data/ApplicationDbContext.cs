@@ -9,5 +9,6 @@ namespace GreenGrid.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Project> Projects { get; set; }
+        public DbSet<EnergyProvider> EnergyProviders { get; set; }
     }
 }
