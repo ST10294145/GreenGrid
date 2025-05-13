@@ -28,11 +28,12 @@ namespace GreenGrid.Data
             {
                 user = new User
                 {
+                    Name = "Admin Farmer",              
                     UserName = adminEmail,
                     Email = adminEmail,
                     EmailConfirmed = true,
-                    Province = "Gauteng",            // 👈 Required custom field
-                    Department = "Crop Production"   // 👈 Required custom field
+                    Province = "Gauteng",
+                    Department = "Crop Production"
                 };
 
                 var createUserResult = await userManager.CreateAsync(user, adminPassword);
