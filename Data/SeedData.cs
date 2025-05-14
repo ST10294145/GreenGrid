@@ -19,27 +19,51 @@ namespace GreenGrid.Data
                 }
             }
 
-            // Create a default admin user (Farmer)
-            var adminEmail = "farmer.admin@greengrid.com";
-            var adminPassword = "Farmer@123";
+            // Create a default Farmer user
+            var farmerEmail = "farmer.admin@greengrid.com";
+            var farmerPassword = "Farmer@123";
 
-            var user = await userManager.FindByEmailAsync(adminEmail);
-            if (user == null)
+            var farmerUser = await userManager.FindByEmailAsync(farmerEmail);
+            if (farmerUser == null)
             {
-                user = new User
+                farmerUser = new User
                 {
-                    Name = "Admin Farmer",              
-                    UserName = adminEmail,
-                    Email = adminEmail,
+                    Name = "Admin Farmer",
+                    UserName = farmerEmail,
+                    Email = farmerEmail,
                     EmailConfirmed = true,
                     Province = "Gauteng",
                     Department = "Crop Production"
                 };
 
-                var createUserResult = await userManager.CreateAsync(user, adminPassword);
-                if (createUserResult.Succeeded)
+                var createFarmerResult = await userManager.CreateAsync(farmerUser, farmerPassword);
+                if (createFarmerResult.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "Farmer");
+                    await userManager.AddToRoleAsync(farmerUser, "Farmer");
+                }
+            }
+
+            // Create a default Employee user
+            var employeeEmail = "employee.user@greengrid.com";
+            var employeePassword = "Employee@123";
+
+            var employeeUser = await userManager.FindByEmailAsync(employeeEmail);
+            if (employeeUser == null)
+            {
+                employeeUser = new User
+                {
+                    Name = "Employee User",
+                    UserName = employeeEmail,
+                    Email = employeeEmail,
+                    EmailConfirmed = true,
+                    Province = "Western Cape",
+                    Department = "Soil Science"
+                };
+
+                var createEmployeeResult = await userManager.CreateAsync(employeeUser, employeePassword);
+                if (createEmployeeResult.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(employeeUser, "Employee");
                 }
             }
         }
