@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using GreenGrid.Data;
 using GreenGrid.Models;
 
 namespace GreenGrid.Controllers
 {
+    [Authorize] // Require authentication by default
     public class EnergyProvidersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +22,14 @@ namespace GreenGrid.Controllers
         }
 
         // GET: EnergyProviders
+        [AllowAnonymous] // Publicly viewable
         public async Task<IActionResult> Index()
         {
             return View(await _context.EnergyProviders.ToListAsync());
         }
 
         // GET: EnergyProviders/Details/5
+        [AllowAnonymous] // Publicly viewable
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,8 +54,6 @@ namespace GreenGrid.Controllers
         }
 
         // POST: EnergyProviders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CompanyName,ServiceType,Province,ContactEmail,Description,Website")] EnergyProvider energyProvider)
@@ -82,8 +84,6 @@ namespace GreenGrid.Controllers
         }
 
         // POST: EnergyProviders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,ServiceType,Province,ContactEmail,Description,Website")] EnergyProvider energyProvider)

@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using GreenGrid.Data;
 using GreenGrid.Models;
 
 namespace GreenGrid.Controllers
 {
+    [Authorize] // Ensure user is authenticated before accessing any action
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +22,7 @@ namespace GreenGrid.Controllers
         }
 
         // GET: Products
+        [Authorize(Roles = "Employee, Admin")] // Allow employees and admin to view products
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Products.Include(p => p.Farmer);
@@ -27,6 +30,7 @@ namespace GreenGrid.Controllers
         }
 
         // GET: Products/Details/5
+        [Authorize(Roles = "Employee, Admin")] // Allow employees and admin to view details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,6 +50,7 @@ namespace GreenGrid.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Farmer, Admin")] // Only farmers and admin can create products
         public IActionResult Create()
         {
             ViewData["FarmerId"] = new SelectList(_context.Farmers, "FarmerId", "Location");
@@ -53,8 +58,7 @@ namespace GreenGrid.Controllers
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Farmer, Admin")] // Only farmers and admin can create products
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,Name,Category,ProductionDate,FarmerId")] Product product)
@@ -70,6 +74,7 @@ namespace GreenGrid.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Farmer, Admin")] // Only farmers and admin can edit products
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,8 +92,7 @@ namespace GreenGrid.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Farmer, Admin")] // Only farmers and admin can edit products
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Category,ProductionDate,FarmerId")] Product product)
@@ -123,6 +127,7 @@ namespace GreenGrid.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Farmer, Admin")] // Only farmers and admin can delete products
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,6 +147,7 @@ namespace GreenGrid.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize(Roles = "Farmer, Admin")] // Only farmers and admin can delete products
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

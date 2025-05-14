@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="FarmerId" class="control-label"></label>
-                <select asp-for="FarmerId" class ="form-control" asp-items="ViewBag.FarmerId"></select>
+                <select asp-for="FarmerId" class="form-control" asp-items="ViewBag.FarmerId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -43,5 +43,51 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@section Styles {
+    <style>
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label.control-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        input.form-control,
+        select.form-control {
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            width: 100%;
+        }
+
+        input.btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+        }
+
+            input.btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .text-danger {
+            font-size: 0.875rem;
+        }
+    </style>
 }
