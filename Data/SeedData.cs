@@ -45,7 +45,7 @@ namespace GreenGrid.Data
 
             // Create a default Employee user
             var employeeEmail = "employee.user@greengrid.com";
-            var employeePassword = "Employee@123";
+            var employeePassword = "Employee@1234";
 
             var employeeUser = await userManager.FindByEmailAsync(employeeEmail);
             if (employeeUser == null)
