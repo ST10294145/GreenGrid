@@ -41,7 +41,7 @@ The Agri-Energy Connect Platform is a visionary initiative aimed at bridging the
 ### Setup Instructions
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/agri-energy-connect.git
+   git clone (https://github.com/ST10294145/GreenGrid.git)
    ```
 2. **Database Setup**
    - Import the provided SQL scripts to set up the database with sample data.
@@ -66,10 +66,6 @@ Use the following sample credentials to log in to the system:
 ### Adding Data
 - Farmers can add products through their dashboard.
 - Employees can add farmer profiles and view/filter product lists.
-
-## Documentation
-
-Refer to the `docs` folder for detailed guidelines on system functionalities and user roles.
 
 ## Contribution
 
