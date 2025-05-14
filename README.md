@@ -1,6 +1,3 @@
-Here’s the updated README file with the requested login credentials added under the **Usage** section:
-
-````markdown
 # Agri-Energy Connect Platform Prototype
 
 ## Overview
@@ -82,10 +79,3 @@ Feel free to fork the repository and submit pull requests. For major changes, pl
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-````
-
-### Changes Made:
-- Added the **Farmer Account** and **Employee Account** credentials under the **Usage** section, specifically in the **Logging In** subsection.
-- Ensured the formatting is clear and easy to read.
-
-Let me know if there’s anything else you’d like to adjust!
