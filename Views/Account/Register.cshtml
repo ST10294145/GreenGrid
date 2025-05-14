@@ -1,54 +1,98 @@
-﻿@model GreenGrid.Models.User
-
-@{
-    ViewData["Title"] = "Register";
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
 
-<h2>Register</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - GreenGrid</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f9f4;
+            color: #2e473b;
+            margin: 0;
+            padding: 0;
+        }
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        header, nav, footer {
+            background-color: #3e7c4c;
+            color: white;
+            padding: 1rem;
+        }
+
+        a {
+            color: #2e6e3f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: #5fa65f;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a8f4a;
+        }
+
+        .container {
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border: 1px solid #d3e5d3;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #b0c9b0;
+            border-radius: 4px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #2d5235;
+        }
+
+        h1, h2, h3 {
+            color: #3b703b;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GreenGrid - Sustainable Farming</h1>
+    </header>
+
+    <div class="container">
+        <h2>Welcome to GreenGrid</h2>
+        <p>This is your sustainable agriculture dashboard.</p>
+        <a href="/Account/Login" class="btn-primary">Login</a>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label>Password</label>
-        <input name="password" type="password" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Province"></label>
-        <input asp-for="Province" class="form-control" />
-        <span asp-validation-for="Province" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Department"></label>
-        <input asp-for="Department" class="form-control" />
-        <span asp-validation-for="Department" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="Role">Role</label>
-        <select class="form-control" id="Role" name="role" required>
-            <option value="Farmer">Farmer</option>
-            <option value="Employee">Employee</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+    <footer>
+        <p>&copy; 2025 GreenGrid. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -2,25 +2,103 @@
     ViewData["Title"] = "Login";
 }
 
-<h2>Login</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - GreenGrid</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f9f4;
+            color: #2e473b;
+            margin: 0;
+            padding: 0;
+        }
 
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">
-        @ViewBag.Error
+        .login-container {
+            max-width: 400px;
+            margin: 3rem auto;
+            background-color: #ffffff;
+            border: 1px solid #d3e5d3;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #3b703b;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+            color: #2d5235;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #b0c9b0;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #5fa65f;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #4a8f4a;
+            }
+
+        .alert-danger {
+            background-color: #ffcccc;
+            border: 1px solid #ff5c5c;
+            padding: 0.75rem;
+            color: #800000;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post">
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" id="Email" name="email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" id="Password" name="password" required />
+            </div>
+
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
     </div>
-}
-
-<form method="post">
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input type="email" class="form-control" id="Email" name="email" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Password">Password</label>
-        <input type="password" class="form-control" id="Password" name="password" required />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+</body>
+</html>
