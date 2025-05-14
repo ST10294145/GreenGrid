@@ -1,7 +1,7 @@
-﻿using GreenGrid.Data;
-using GreenGrid.Models;
+﻿using GreenGrid.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace GreenGrid.Controllers
@@ -33,46 +33,28 @@ namespace GreenGrid.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Attempting to register user: {user.Email} with role: {role}");
-
-                var userExist = await _userManager.FindByEmailAsync(user.Email);
-                if (userExist != null)
+                var existingUser = await _userManager.FindByEmailAsync(user.Email);
+                if (existingUser != null)
                 {
                     ModelState.AddModelError("Email", "Email is already in use.");
                     return View(user);
                 }
 
                 var result = await _userManager.CreateAsync(user, password);
-
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created successfully");
-
                     if (!await _roleManager.RoleExistsAsync(role))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(role));
-                        _logger.LogInformation($"Created new role: {role}");
                     }
 
-                    var roleResult = await _userManager.AddToRoleAsync(user, role);
-
-                    if (roleResult.Succeeded)
-                    {
-                        _logger.LogInformation($"Added user to role: {role}");
-                        return RedirectToAction("Login");
-                    }
-
-                    foreach (var error in roleResult.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                        _logger.LogError($"Role error: {error.Description}");
-                    }
+                    await _userManager.AddToRoleAsync(user, role);
+                    return RedirectToAction("Login");
                 }
 
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
-                    _logger.LogError($"User creation error: {error.Description}");
                 }
             }
 
@@ -89,11 +71,9 @@ namespace GreenGrid.Controllers
         public async Task<IActionResult> Login(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
-
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
                 var roles = await _userManager.GetRolesAsync(user);
-
                 if (roles.Contains("Farmer"))
                 {
                     HttpContext.Session.SetString("UserRole", "Farmer");
@@ -107,7 +87,6 @@ namespace GreenGrid.Controllers
             }
 
             ViewBag.Error = "Invalid login credentials.";
-            _logger.LogWarning($"Failed login attempt for email: {email}");
             return View();
         }
     }
