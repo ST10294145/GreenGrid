@@ -4,44 +4,108 @@
     ViewData["Title"] = "Create";
 }
 
+<style>
+    body {
+        background-color: #f3fff3;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1, h4 {
+        color: #3a6e3a;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #cdeac0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    label {
+        color: #2e4e32;
+        font-weight: 500;
+    }
+
+    input.form-control {
+        border: 1px solid #a8d5a8;
+        border-radius: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    .text-danger {
+        color: #c0392b;
+    }
+
+    a {
+        color: #2e7031;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        a:hover {
+            text-decoration: underline;
+            color: #4a8f4a;
+        }
+</style>
+
 <h1>Create</h1>
 
-<h4>EnergyProvider</h4>
+<h4>Energy Provider</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="CompanyName" class="control-label"></label>
                 <input asp-for="CompanyName" class="form-control" />
                 <span asp-validation-for="CompanyName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ServiceType" class="control-label"></label>
                 <input asp-for="ServiceType" class="form-control" />
                 <span asp-validation-for="ServiceType" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Province" class="control-label"></label>
                 <input asp-for="Province" class="form-control" />
                 <span asp-validation-for="Province" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ContactEmail" class="control-label"></label>
                 <input asp-for="ContactEmail" class="form-control" />
                 <span asp-validation-for="ContactEmail" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Website" class="control-label"></label>
                 <input asp-for="Website" class="form-control" />
                 <span asp-validation-for="Website" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -50,9 +114,11 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">← Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

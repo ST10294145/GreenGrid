@@ -4,39 +4,102 @@
     ViewData["Title"] = "Create";
 }
 
+<style>
+    body {
+        background-color: #f4fff4;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1, h4 {
+        color: #3b703b;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #cde8cd;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    label {
+        color: #2e473b;
+        font-weight: 500;
+    }
+
+    input.form-control {
+        border: 1px solid #a3d7a3;
+        border-radius: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    a {
+        color: #2e7031;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        a:hover {
+            text-decoration: underline;
+            color: #4a8f4a;
+        }
+
+    .text-danger {
+        color: #d9534f;
+    }
+</style>
+
 <h1>Create</h1>
 
 <h4>Project</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
                 <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
                 <input asp-for="EndDate" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 <input asp-for="Status" class="form-control" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -45,9 +108,11 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">← Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

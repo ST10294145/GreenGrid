@@ -4,62 +4,97 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+    body {
+        background-color: #f0fff0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1 {
+        color: #2e6e3e;
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: #2e7031;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+            color: #4a8f4a;
+        }
+
+    .table {
+        background-color: #ffffff;
+        border: 1px solid #cdeac0;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        margin-top: 15px;
+    }
+
+        .table th {
+            background-color: #d4edda;
+            color: #2f5735;
+            border-bottom: 2px solid #c3e6cb;
+        }
+
+        .table td {
+            border-top: 1px solid #dee2e6;
+            color: #2c3e50;
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+    p a {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+
+        p a:hover {
+            background-color: #45a049;
+        }
+</style>
+
+<h1>Energy Providers</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ServiceType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Province)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Website)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.CompanyName)</th>
+            <th>@Html.DisplayNameFor(model => model.ServiceType)</th>
+            <th>@Html.DisplayNameFor(model => model.Province)</th>
+            <th>@Html.DisplayNameFor(model => model.ContactEmail)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Website)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Province)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Website)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CompanyName)</td>
+                <td>@Html.DisplayFor(modelItem => item.ServiceType)</td>
+                <td>@Html.DisplayFor(modelItem => item.Province)</td>
+                <td>@Html.DisplayFor(modelItem => item.ContactEmail)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Website)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

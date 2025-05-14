@@ -4,56 +4,75 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+    body {
+        background-color: #f4fff4;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1 {
+        color: #3b703b;
+        border-bottom: 2px solid #a3d7a3;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: #2e7031;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        a:hover {
+            color: #4a8f4a;
+            text-decoration: underline;
+        }
+
+    .table {
+        background-color: #ffffff;
+        border: 1px solid #d4eed4;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .table th {
+            background-color: #d4eed4;
+            color: #2e473b;
+            font-weight: bold;
+        }
+
+        .table td {
+            background-color: #f9fff9;
+            color: #333;
+        }
+
+    .btn-create {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+        .btn-create:hover {
+            background-color: #45a049;
+        }
+</style>
+
+<h1>Project Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn-create" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
