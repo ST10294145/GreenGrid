@@ -29,7 +29,19 @@ namespace GreenGrid
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-            // Add MVC services
+            // Add cookie authentication & role-based authorization
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                // You can add policy-based roles here if needed
+                // options.AddPolicy("RequireFarmerRole", policy => policy.RequireRole("Farmer"));
+            });
+
             builder.Services.AddControllersWithViews();
 
             // Configure session
@@ -52,7 +64,10 @@ namespace GreenGrid
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseRouting();
+
+            // Add auth & session middleware
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
@@ -74,7 +89,6 @@ namespace GreenGrid
                 }
             }
 
-            // Define route patterns
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
