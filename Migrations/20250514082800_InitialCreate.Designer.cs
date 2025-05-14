@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenGrid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250514080652_AddCustomUserProperties")]
-    partial class AddCustomUserProperties
+    [Migration("20250514082800_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
