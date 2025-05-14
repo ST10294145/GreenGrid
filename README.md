@@ -1,4 +1,4 @@
-Certainly! Below is a template for a README file that you can use for your GitHub repository. This template is based on the requirements and features described for the Agri-Energy Connect Platform prototype.
+Here’s the updated README file with the requested login credentials added under the **Usage** section:
 
 ````markdown
 # Agri-Energy Connect Platform Prototype
@@ -56,7 +56,15 @@ The Agri-Energy Connect Platform is a visionary initiative aimed at bridging the
 ## Usage
 
 ### Logging In
-- Use the provided sample credentials to log in as either a Farmer or an Employee.
+Use the following sample credentials to log in to the system:
+
+#### Farmer Account
+- **Email**: farmer.admin@greengrid.com  
+- **Password**: Farmer@123  
+
+#### Employee Account
+- **Email**: employee.user@greengrid.com  
+- **Password**: Employee@1234  
 
 ### Adding Data
 - Farmers can add products through their dashboard.
@@ -76,16 +84,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ````
 
-### Explanation
+### Changes Made:
+- Added the **Farmer Account** and **Employee Account** credentials under the **Usage** section, specifically in the **Logging In** subsection.
+- Ensured the formatting is clear and easy to read.
 
-- **Overview**: Introduces the project and its purpose.
-- **Features**: Lists the main functionalities of the prototype.
-- **Development Process and Testing**: Describes the approach taken to develop and test the application.
-- **Installation and Setup**: Provides step-by-step instructions to set up the development environment and run the application.
-- **Usage**: Explains how to use the application once it's running.
-- **Documentation**: Points to additional documentation if available.
-- **Contribution**: Encourages contributions and explains how to contribute.
-- **License**: Mentions the licensing of the project. Adjust as necessary.
-
-You can customize this template further based on your specific project details and requirements.
-
+Let me know if there’s anything else you’d like to adjust!
