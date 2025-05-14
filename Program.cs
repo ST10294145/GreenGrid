@@ -2,25 +2,31 @@
 using GreenGrid.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Session;
 
 namespace GreenGrid
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)  // Changed to async Task
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // 🔌 Configure EF Core with SQL Server
+            // Configure EF Core with SQL Server
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // 🔐 Add Identity services with custom User and Role support
+            // Add Identity services with relaxed password requirements
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
+
+                // Password settings (relaxed for development)
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
@@ -28,18 +34,18 @@ namespace GreenGrid
             // Add MVC services
             builder.Services.AddControllersWithViews();
 
-            // 🚧 Configure session services
-            builder.Services.AddDistributedMemoryCache();  // For session storage
+            // Configure session
+            builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);  // Set session timeout (adjust as needed)
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
 
             var app = builder.Build();
 
-            // 🚧 Error handling and middleware
+            // Configure the HTTP request pipeline
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -48,32 +54,33 @@ namespace GreenGrid
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
-            // ⛔ Must be before UseAuthorization
             app.UseAuthentication();
             app.UseAuthorization();
-
-            // 🛠️ Enable session middleware
             app.UseSession();
 
-            // 🛠️ Seed the database with roles and a default user on app startup
+            // Seed database
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var userManager = services.GetRequiredService<UserManager<User>>();
-                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                SeedData.Initialize(services, userManager, roleManager).Wait();
+                try
+                {
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await SeedData.Initialize(services, userManager, roleManager);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while seeding the database.");
+                }
             }
 
-            // 🔁 MVC route
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app.Run();
+            await app.RunAsync();  // Changed to RunAsync
         }
     }
 }
-// secure push
